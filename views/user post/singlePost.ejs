@@ -1,0 +1,30 @@
+<%- include ('../partials/header') %>
+    <title>Full Post</title>
+</head>
+<body>
+  <%- include ('../partials/navbar') %>
+
+    <div class="container">
+        <div class="row my-4">
+          <div class="col-md-9 mx-auto">
+              <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title"><%= singlePost.title%></h5> 
+                    <div class="d-flex justify-content-between">
+                      <p class="text-muted">Posted by: <em><%= singlePost.author.name%></em></p>
+                      <p class="text-muted">Date: <%= new Date(singlePost.createdAt).toDateString()%></p>
+                    </div>
+                    <p class="text-muted">Subject: <em><%= singlePost.category%></em></p>
+                      
+                    <p class="card-text">
+                        <%= singlePost.description%>
+                    </p>
+                    <p class="text-muted">comments</p>
+                  </div>
+              </div>
+           </div>
+        </div>
+  <%- include ('../partials/footer') %>
+
+
+    

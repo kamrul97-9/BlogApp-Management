@@ -1,0 +1,193 @@
+<%- include ('../partials/header') %>
+    <title>user profile</title>
+</head>
+<body>
+    <%- include ('../partials/navbar') %>
+    <div class="mt-3">
+        <%- include ('../partials/alert.ejs') %>
+    </div>
+
+<!--ACTIONS-->
+<section id="actions" class="py-4 mb-4">
+    <div class="container">
+      <div class="row">
+
+        <div class="col-md-4 my-2">
+          <a href="" class="btn btn-primary btn-block" data-toggle="modal" data-target="#changePasswordModal">
+            <i class="fa fa-key"></i> Change Password
+          </a>
+        </div>
+
+        <div class="col-md-4 my-2">
+          <a href="" class="btn btn-warning btn-block" data-toggle="modal" data-target="#updateProfileModal">
+            <i class="fa fa-refresh"></i> Update Profile
+          </a>
+        </div>
+
+          <div class="col-md-4 my-2">
+            <a class="btn btn-danger btn-block" data-toggle="modal" data-target="#deleteProfileModal">
+              <i class="fa fa-remove"></i> Delete Profile
+            </a>
+          </div>
+      </div>
+    </div>
+  </section>
+
+<!--PROFILE-->
+<section class="mt-4">
+	<div class="container">
+			<div class="row">
+					<div class="col-md-4">
+						<img src="/images/<%=user.image || "default.jpg"%>" class="card-img-top rounded-circle">
+						<div class="d-flex justify-content-center p-2">
+							<a href="" class="btn btn-primary" data-toggle="modal" data-target="#changePhotoModal"><i class="fa fa-camera-retro"> Change Photo</i></a>
+						</div>
+
+					</div>
+					<div class="col-md-8">
+							<h4 class="text-center pb-3">Personal Informations</h4>
+
+							<ul class="list-group list-group-flush">
+								<li class="list-group-item">Name :   <%=user.name%></li>
+                                <li class="list-group-item">Username :   <%=user.username%></li>
+                                <li class="list-group-item">Gender :   <%=user.gender%></li>
+                                <li class="list-group-item">Email :  <%=user.email%></li>
+                                <li class="list-group-item">Address :   <%=currentUser.address%></li>
+                                <li class="list-group-item">Country :   <%=user.country%></li>
+								<li class="list-group-item">Joined :    <%= new Date(user.createdAt).toDateString()%></li>
+							</ul>
+					</div>
+			</div>
+	</div>
+</section>
+
+<!--Delete Profile Modal-->
+<div class="modal fade" id="deleteProfileModal">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header bg-danger text-white">
+          <h5 class="modal-title" id="deleteProfileModalLabel">
+            Once you press yes, you will be deleted permanently. Are you sure?
+          </h5>
+          <button class="close" data-dismiss="modal" ><span>&times;</span></button>
+        </div>
+        <div class="modal-body">
+            <form action="/user/delete-profile" method="POST">
+            <input type="submit" value="Yes" class="btn btn-danger btn-block m-1">
+          </form>
+          <input type="button" value="No" data-dismiss="modal" class="btn btn-success btn-block m-1">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--Change Password Modal-->
+  <div class="modal fade" id="changePasswordModal">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header bg-primary text-white">
+          <h5 class="modal-title" id="passwordModalLabel">
+            Edit Password
+          </h5>
+          <button class="close" data-dismiss="modal" ><span>&times;</span></button>
+        </div>
+        <div class="modal-body">
+          <form action="/user/update-password" method="POST">
+            <div class="form-group">
+              <label for="password" class="form-control-label">Old Password</label>
+              <input type="password" name="oldPass" class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="password" class="form-control-label">New Password</label>
+              <input id="password" type="password" name="newPass" class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="password" class="form-control-label">Confirm Password</label>
+              <input id="confirmPassword" type="password" name="confirmNewPass" class="form-control">
+               <span id='message'></span>
+            </div>
+            <button id="button" class="btn btn-primary btn-block">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--Update Profile Modal-->
+  <div class="modal fade" id="updateProfileModal">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header bg-warning text-white">
+          <h5 class="modal-title" id="updateProfileModalLabel">
+            Edit Profile
+          </h5>
+          <button class="close" data-dismiss="modal" ><span>&times;</span></button>
+        </div>
+        <div class="modal-body">
+          <form action="/user/update-profile" method="POST">
+            <div class="form-group">
+              <label for="name" class="form-control-label">Edit Name</label>
+              <input type="text" name="name" class="form-control"  value="<%=user.name%>">
+            </div>
+            <div class="form-group">
+              <label for="email" class="form-control-label">Change Email</label>
+              <input type="email" name="email" class="form-control" value="<%=user.email%>">
+            </div>
+
+            <div class="form-group">
+              <label class="form-control-label">Gender</label> <br>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="gender" value="male" <%= user.gender === 'male' ? 'checked' : '' %> >
+                  <label class="form-check-label">Male</label>
+                </div>
+
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="gender" value="female" <%= user.gender === 'female' ? 'checked' : '' %> >
+                  <label class="form-check-label">Female</label>
+                </div>
+
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="gender" value="others" <%= user.gender === 'others' ? 'checked' : '' %>>
+                  <label class="form-check-label">Others</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+              <label for="address" class="form-control-label">Address</label>
+              <input type="text" name="address" class="form-control" value="<%=currentUser.address%>">
+            </div>
+            <button class="btn btn-warning btn-block">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--Change Photo Modal-->
+  <div class="modal fade" id="changePhotoModal">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header bg-primary text-white">
+          <h5 class="modal-title" id="passwordModalLabel">
+            Change Photo
+          </h5>
+          <button class="close" data-dismiss="modal" ><span>&times;</span></button>
+        </div>
+        <div class="modal-body">
+          <form method="POST" action="/user/update-image" enctype="multipart/form-data">
+            <div class="form-group">
+              <label for="photo" class="form-control-label">Change Photo</label>
+              <input type="file" name="image" class="form-control" accept="image/*">
+            </div>
+             <input type="submit" class="btn btn-sm btn-primary m-2" value="Submit">
+          </form>
+        </div>
+      </div>
+    </div>
+  </div> <hr>
+
+<!-- userpost -->
+
+
+<!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet"> -->
+
+<%- include ('../partials/footer') %>

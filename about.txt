@@ -1,0 +1,14 @@
+
+
+
+
+
+//res.locals.CurrentUser = user; for security purpose, we don't use it
+
+
+//res.render('user/userProfile', {user : user}); //  when key = user, value is also user. then we just put {user};
+
+images is a folder name, cb is a callback function]
+
+here null is error,
+here null is module error

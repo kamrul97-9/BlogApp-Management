@@ -1,0 +1,34 @@
+  
+    <div class="container">
+        <% if(error && error.length > 0){ %>
+            <div class="alert alert-danger" role="alert">
+                <strong>Error!</strong>
+            <%= error %>
+            </div>
+        <% } %> 
+        <% if(warning && warning.length > 0){ %>
+            <div class="alert alert-warning" role="alert">
+            <h5 class="alert-heading"><i class="fa fa-warning"></i> Warning!</h5>
+            <!-- <center>warning</center> -->
+            <%= warning %>
+            </div>
+        <% } %>
+
+        <% if(success && success.length > 0){ %>
+            <div class="alert alert-success" role="alert">
+                <!-- <h5 class="alert-heading"><i class="fa fa-check" aria-hidden="true"></i> Success!</h5> -->
+            <strong>Success!</strong>
+            <%= success %>
+            </div>
+        <% } %> 
+        <% if(info && info.length > 0){ %>
+            <div class="alert alert-info" role="alert">
+                <!-- <h5 class="alert-heading"><i class="fa fa-check" aria-hidden="true"></i> Success!</h5> -->
+            <strong>Info!</strong>
+            <%= info %>
+            </div>
+        <% } %> 
+
+    </div> 
+
+         

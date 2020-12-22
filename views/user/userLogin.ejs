@@ -1,0 +1,177 @@
+<%- include ('../partials/header') %>
+    <title>Welcome to Blog</title>
+
+    <style>
+      body {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-align: center;
+        align-items: center;
+        padding-top: 40px;
+        padding-bottom: 40px;
+        background-color: #E8ECEF;
+      }
+
+      button[type = "submit"]{
+        border-radius: 10px;
+      }
+
+      body{
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        background: #E8ECEF;
+        /* background: url(1.jpg)no-repeat; */
+        background-size: cover;
+        }
+
+        .form{
+        background: rgb(8, 73, 104);
+        z-index: 1;
+        font-family: "Candara", sans-serif;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 500px;
+        padding: 0 45px 30px 45px;
+        text-align: center;
+        border-radius: 10px;
+        opacity: 0.9;
+        }
+
+        .form h2{
+        color: #fff;
+        margin-top: 10px;
+        font-size: 28px;
+        font-weight: 500;
+        text-align: center;
+        text-transform: uppercase;
+        }
+
+        .form .icons i{
+        color: #fff;
+        margin-bottom: 10px;
+        font-size: 25px;
+        margin: 0 30px 30px 30px;
+        transition: 0.8s;
+        transition-property: color, transform;
+        }
+
+        .form .icons i:hover{
+        color: #06C5CF;
+        transform: scale(1.3);
+        }
+
+        .form input{
+        outline: 0;
+        background: none;
+        font-size: 15px;
+        color: #fff;
+        text-align: center;
+        width: 265px;
+        margin-bottom: 30px;
+        padding: 15px;
+        box-sizing: border-box;
+        border: 2.5px solid #2E86DE;
+        border-radius: 25px;
+        transition: 0.5s;
+        transition-property: width;
+        }
+
+        .form input:hover{
+        width: 300px;
+        }
+
+        .form input:focus{
+        width: 300px;
+        }
+
+        .form button{
+        outline: 0;
+        background: none;
+        color: #fff;
+        font-size: 14px;
+        text-transform: uppercase;
+        width: 150px;
+        padding: 15px;
+        border: 2.5px solid #10AC84;
+        border-radius: 25px;
+        cursor: pointer;
+        transition: 0.5s;
+        transition-property: background, transform;
+        }
+
+        .form button:hover, .form button:active, .form button:focus{
+        background: #10AC84;
+        transform: scale(1.1);
+        }
+
+        .form .options{
+        color: #bbb;
+        font-size: 14px;
+        margin: 20px 0 0;
+        }
+
+        .form .options a{
+        text-decoration: none;
+        color: #06C5CF;
+        }
+    </style>
+
+
+<body>
+      <div class="container mt-3">
+      <!-- <p class="text-center p-3 display-3"><b>Welcome To My Blog</b></p> -->
+      <%- include ('../partials/alert.ejs') %>
+            <!--form area start-->
+              <div class="form mt-3">
+              <!--login form start-->
+              <form action = "/auth/userlogin" method="POST" class="needs-validation p-3" novalidate >
+                <h2>Login</h2>
+                <div class="icons">
+                  <a href="#"><i class="fa fa-facebook"></i></a>
+                  <a href="#"><i class="fa fa-google"></i></a>
+                  <a href="#"><i class="fa fa-twitter"></i></a>
+                </div>
+                <div class="form-group">
+                  <input placeholder="Username" name="username" type="text" required autofocus>
+                  <div class="valid-feedback">Valid.</div>
+                  <div class="invalid-feedback">Please fill out this field.</div>
+                </div>
+
+                <div class="form-group">
+                  <input placeholder="Password" name="password" value="" type="password" required>
+                  <div class="valid-feedback">Valid.</div>
+                  <div class="invalid-feedback">Please fill out this field.</div>
+                </div>
+
+                <button type="submit" name="button">Login</button>
+                <p class="options">Not Registered? <a href="/auth/usersignup">Create an Account</a></p>
+              </form>
+              <!--login form end-->
+                  <p class="text-muted text-center">&copy; Kamrul Islam Hridoy</p>
+              </div>
+              <!--form area end-->
+              <script>
+                 // Disable form submissions if there are invalid fields
+                 (function() {
+                     'use strict';
+                     window.addEventListener('load', function() {
+                     // Get the forms we want to add validation styles to
+                     var forms = document.getElementsByClassName('needs-validation');
+                     // Loop over them and prevent submission
+                     var validation = Array.prototype.filter.call(forms, function(form) {
+                         form.addEventListener('submit', function(event) {
+                         if (form.checkValidity() === false) {
+                             event.preventDefault();
+                             event.stopPropagation();
+                         }
+                         form.classList.add('was-validated');
+                         }, false);
+                     });
+                     }, false);
+                 })();
+             </script>
+    </div>
+
