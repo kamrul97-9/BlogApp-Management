@@ -177,7 +177,7 @@ exports.getAllviewProfile =async (req, res, next) => {
 
 exports.getUserViewProfile = async(req,res, next) =>{
     try {
-    //console.log(`From getViewProfile --> ${req.user}`);
+    console.log(`From getUserViewProfile --> ${req.user}`);
     //console.log(req.user);
     let user = {
         name: req.user.name,
@@ -327,6 +327,7 @@ exports.postUploadUserImage = async(req, res, next) => {
             
             const user = await User.findById(user_id);
       
+            //console.log(user);
             // res.send(user);
             res.render("users/user_profile", {user_profile : user});
       
